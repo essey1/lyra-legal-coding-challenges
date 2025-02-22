@@ -10,29 +10,32 @@
 // Expected output: { math: 82.5, english: 82.5, science: 88.5 }
 
 function averageGrades(students) {
-    const subjects = {};
-    let studentCount = 0;
+    let subjects = {}; 
 
-    students.forEach(student => {
-        studentCount++;
-        for (const [subject, grade] of Object.entries(student.grades)) {
+    // Loop through each student
+    for (let i = 0; i < students.length; i++) {
+        let student = students[i];
+
+        // Loop through each subject in grades
+        for (let subject in student.grades) {
             if (!subjects[subject]) {
                 subjects[subject] = { total: 0, count: 0 };
             }
-            subjects[subject].total += grade;
+            subjects[subject].total += student.grades[subject];
             subjects[subject].count++;
         }
-    });
+    }
 
-    return Object.fromEntries(
-        Object.entries(subjects).map(([subject, { total, count }]) => 
-            [subject, total / count]
-        )
-    );
+    // Create final result object
+    let result = {};
+    for (let subject in subjects) {
+        result[subject] = subjects[subject].total / subjects[subject].count;
+    }
+
+    return result;
 }
 
 console.log(averageGrades([
     { name: "Alice", grades: { math: 90, english: 85, science: 92 } },
     { name: "Bob", grades: { math: 75, english: 80, science: 85 } }
 ])); 
-// { math: 82.5, english: 82.5, science: 88.5 }

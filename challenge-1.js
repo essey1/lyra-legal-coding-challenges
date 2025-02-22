@@ -5,7 +5,14 @@
 // Example: [1, -2, 3, -4, 5] → [2, 6, 10]
 
 function doublePositiveNumbers(arr) {
-    return arr.filter(num => num > 0).map(num => num * 2);
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] > 0) {
+            result.push(arr[i] * 2);
+        }
+    }
+    return result;
 }
+
 
 console.log(doublePositiveNumbers([1, -2, 3, -4, 5]));
